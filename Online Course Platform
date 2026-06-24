@@ -1,0 +1,29 @@
+Create Database Online_Cousre_Platform;
+-------------
+Create Table students (
+Students_id int primary key identity (1,1),
+Name NVarchar (255) Not Null,
+Email Varchar (255) not null Unique,
+Age int check(Age>=16) not null,
+Country Varchar (255) default ('Egypt') not null
+);
+-------------
+Create Table Cousres (
+Cousres_id int primary key identity(1,1),
+Courses_Name NVarchar (255) not null,
+Price DECIMAL(10, 2) CHECK (Price >= 0) NOT NULL,
+Category NVARCHAR(50) NOT NULL CHECK 
+(Category IN ('Programming', 'Business', 'Design', 'Marketing'))
+);
+-------------
+CREATE TABLE Enrollments (
+    EnrollmentID INT PRIMARY KEY IDENTITY(1,1),
+    StudentID INT NOT NULL,
+    CourseID INT NOT NULL,
+    EnrollDate DATETIME DEFAULT GETDATE(),
+    ---
+    Constraint FK_Student_Enrollment Foreign key (Students_id) 
+    References  Students(StudentID),
+    CONSTRAINT FK_Course_Enrollment FOREIGN KEY (Cousres_id) 
+        REFERENCES Courses(CourseID)
+        );
